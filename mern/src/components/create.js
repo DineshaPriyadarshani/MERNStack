@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import axios from 'axios';
 export class create extends Component {
     constructor(props){
         super(props);
@@ -40,6 +40,16 @@ export class create extends Component {
         
         console.log("Form submitted");
         console.log(this.state.name);
+
+        const newUser = {
+            name: this.state.name,
+            email: this.state.email,
+            gender: this.state.gender,
+            isAdmin: this.state.isAdmin
+        };
+
+        axios.post('http://localhost/mernStack/add', newUser)
+            .then(res=> console.log(res.data));
 
         this.setState({
             name:'',
