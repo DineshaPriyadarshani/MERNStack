@@ -2,26 +2,26 @@ import React, { Component } from 'react'
 import { Link }  from 'react-router-dom';
 import axios from 'axios';
 
-const Users = props =>(
+const Users = props => (
   <tr>
-    <td>{props.users.name}</td>
-    <td>{props.users.email}</td>
-    <td>{props.users.gender}</td>
-    <td> 
-      <Link to={"/edit/"+props.user._id}>Edit</Link>
+    <td className={props.users.isAdmin ? 'Admin' : ''}>{props.users.name}</td>
+    <td className={props.users.isAdmin ? 'Admin' : ''}>{props.users.email}</td>
+    <td className={props.users.isAdmin ? 'Admin' : ''}>{props.users.gender}</td>
+    <td>
+      <Link to={"/edit/"+props.users._id}>Edit</Link>
     </td>
   </tr>
 )
 export class view extends Component {
   constructor(props){
     super(props);
-    this.state={users: []};
+    this.state={mernStack: []};
   }
 
-  componentDidMount{
+  componentDidMount(){
     axios.get('http://localhost:4000/mernStack/')
       .then(response=>{
-        this.ListeningStateChangedEvent({ users: response.data});
+        this.setState({ mernStack: response.data});
       })
       .catch(function(error){
         console.log(error);
@@ -29,8 +29,8 @@ export class view extends Component {
     }
 
     Users(){
-      return this.state.users.map(function(currentUser, i){
-        return <User user={currentUser} key={i} />;
+      return this.state.mernStacks.map(function(currentUser, i){
+        return <Users user={currentUser} key={i} />;
       })
     }
 

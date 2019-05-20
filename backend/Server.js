@@ -2,8 +2,12 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const mongoose = require('mongoose');
 const PORT = 4000;
 const mernRoutes = express.Router();
+
+let Mern = require('./mernStack.model');
+
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -22,7 +26,7 @@ app.listen(PORT, function() {
 app.use('/mernStack', mernRoutes);
 
 mernRoutes.route('/').get(function(req, res) {
-    mern.find(function(err, mernStack) {
+    Mern.find(function(err, mernStack) {
         if (err) {
             console.log(err);
         } else {
@@ -32,12 +36,15 @@ mernRoutes.route('/').get(function(req, res) {
 });
 mernRoutes.route('/:id').get(function(req, res) {
     let id = req.params.id;
-    mern.findById(id, function(err, mernStack){
-        res.json(mernStack);
+    Mern.findById(id, function(err, mern){
+        res.json(mern);
     });
 });
+
 mernRoutes.route('/add').post(function(req, res) {
-    let mern = new merStack(req.body);
+    
+    let mern = new Mern(req.body);
+    console.log("object");
     mern.save()
         .then(mern => {
             res.status(200).json({'mern':'mern added successfully'});
@@ -47,7 +54,7 @@ mernRoutes.route('/add').post(function(req, res) {
         });
 });
 mernRoutes.route('/update/:id').post(function(req, res) {
-    mern.findById(req.params.id, function(err, mern){
+    Mern.findById(req.params.id, function(err, mern){
         if(!mern)
             res.status(404).send("Data is not found");
         else
