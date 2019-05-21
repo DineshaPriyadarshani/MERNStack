@@ -29,7 +29,7 @@ export class view extends Component {
     }
 
     Users(){
-      return this.state.mernStacks.map(function(currentUser, i){
+      return this.state.mernStack.map(function(currentUser, i){
         return <Users user={currentUser} key={i} />;
       })
     }
