@@ -30,7 +30,7 @@ export class view extends Component {
 
     Users(){
       return this.state.mernStack.map(function(currentUser, i){
-        return <Users user={currentUser} key={i} />;
+        return <Users users={currentUser} key={i} />;
       })
     }
 
@@ -44,7 +44,7 @@ export class view extends Component {
               <th>Name</th>
               <th>Email</th>
               <th>Gender</th>
-              <th>isAdmin</th>
+              <th>Completed</th>
             </tr>
           </thead>
           <tbody>

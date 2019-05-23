@@ -27,7 +27,7 @@ export class edit extends Component {
 
 onChangeEmail(e) {
     this.setState({
-        emial: e.target.value
+        email: e.target.value
     });
 }
 

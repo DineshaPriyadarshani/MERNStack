@@ -47,14 +47,14 @@ export class create extends Component {
             gender: this.state.gender,
             isAdmin: this.state.isAdmin
         };
-
-        axios.post('http://localhost/mernStack/add', newUser)
+        console.log(newUser);
+        axios.post('http://localhost:4000/mernStack/add', newUser)
             .then(res=> console.log(res.data));
 
         this.setState({
             name:'',
             email:'',
-            Gender:'',
+            gender:'',
             isAdmin:false
         })
     }
